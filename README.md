@@ -1,21 +1,18 @@
 # FD-Java-RaspberryPi : Chapter 1
 
-## Prepare the Pi
-## Operating system on SD
-
 ## DHCP Configuration
 
-<b>Raspberry Pi’s currently assigned IP address</b>
+* Raspberry Pi’s currently assigned IP address
 ```
 $ hostname -I
 ```
 
-<b>Your router’s gateway IP address</b>
+* Your router’s gateway IP address
 ```
 $ ip r | grep default
 ```
 
-<b>Your router’s DNS (Domain Name System) IP address</b>
+* Your router’s DNS (Domain Name System) IP address
 ```
 sudo nano /etc/resolv.conf
 ```
@@ -25,7 +22,7 @@ sudo nano /etc/resolv.conf
 $ sudo nano /etc/dhcpcd.conf
 ```
 
-```
+```conf
 interface NETWORK 
 static ip_address=STATIC_IP/24
 static routers=ROUTER_IP 
@@ -44,9 +41,6 @@ $ sudo reboot
 
 $ hostname -I
 ```
-
-Set a Static IP Address:Success
-
 
 ## SSH to Raspberry Pi
 
