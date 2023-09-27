@@ -3,12 +3,18 @@
 ## Install Java JDK on a Raspberry Pi
 
 ### Downloading and testing BellSoft Liberica JDK
-```
+
+```shell
 $ cd /home/pi
 $ wget https://download.bell-sw.com/java/13/bellsoft-jdk13-linux-arm32-vfp-hflt.deb
 $ sudo apt-get install ./bellsoft-jdk13-linux-arm32-vfp-hflt.deb
 $ sudo update-alternatives --config javac
 $ sudo update-alternatives --config java
+$
+$ java --version
+openjdk 13-BellSoft 2019-09-17
+OpenJDK Runtime Environment (build 13-BellSoft+33)
+OpenJDK Server VM (build 13-BellSoft+33, mixed mode)
 ```
 
 ## Some of the changes between Java versions
