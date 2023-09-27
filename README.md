@@ -113,12 +113,12 @@ $ gpio readall
 Important, if you are using a Raspberry Pi 4, you will need to make sure you are on the latest version 2.52. Because the internal wiring of the processor of this type is different compared to the previous boards, an updated gpio is available. Check the version with “gpio -v” in the terminal and install the new version with the following commands:
 
 ```shell
-$ gpio -v
-gpio version: 2.50
+
 $ cd /tmp
 $ wget  https://project-downloads.drogon.net/wiringpi-latest.deb
 $ sudo dpkg -i wiringpi-latest.deb
 $ gpio -v
+gpio version: 2.50
 ```
 
 ---
