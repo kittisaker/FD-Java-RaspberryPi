@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: com.danibuiza.firstexample.AppTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.171 sec <<< FAILURE!
+testAppDivide(com.danibuiza.firstexample.AppTest)  Time elapsed: 0.089 sec  <<< FAILURE!
+junit.framework.AssertionFailedError: expected:<83.0> but was:<8.0>
+	at junit.framework.Assert.fail(Assert.java:47)
+	at junit.framework.Assert.failNotEquals(Assert.java:282)
+	at junit.framework.Assert.assertEquals(Assert.java:64)
+	at junit.framework.Assert.assertEquals(Assert.java:71)
+	at com.danibuiza.firstexample.AppTest.testAppDivide(AppTest.java:43)
+
