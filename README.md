@@ -1,6 +1,15 @@
 # FD-Java-RaspberryPi : Chapter 6 Maven
 
+## Install New OS
+
+Install New OS with <b>Raspberry Pi Imager</b> choose <b>Raspberry PI OS Full</b> after that ssh to it.
+Check java version
+Extension : markdownlint
+Extension : Java Extension Pack
+Extension : XML
+
 ## Install Maven On Raspberry Pi
+
 
 ```shell
 $ sudo apt install maven
@@ -135,9 +144,79 @@ With these plugin included in the “pom.xml”-file, we can build the applicati
 ```shell
 $ mvn clean package
 ```
+
 Don’t worry if this is not fully clear at this moment! In the GitHub sources of each example used in this book, you can find the correct pom-file and the generated jar-file you can run on the Pi. So you have the choice to generate the package yourself, or use the provided one. How to build and run each example is also described in the examples.
 
 
 ### Add application logging with Maven and log4j
 
 [reference](https://examples.javacodegeeks.com/java-development/core-java/maven/log4j-maven-example/)
+
+```shell
+$ mvn archetype:generate -DgroupId=be.webtechie -DartifactId=java-maven-logging -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+```
+
+In the examples in this book “System.out.println()” and “System.err.println()” are used to output log messages which can be used for debugging. These log messages are only available when you start your Java application from the terminal and are lost when you end your application.
+
+For a better approach, use log4j which can be configured to, for example, both log into the console similar to “System.out” and to a file, so you can still access the log messages after the application has finished.
+
+The pom-file needs to be extended with this Maven dependency:
+
+```xml
+<dependency>
+    <groupId>log4j</groupId>
+    <artifactId>log4j</artifactId>
+    <version>1.2.17</version>
+</dependency>
+```
+
+The initialization and some example logging is done in “App.java”:
+
+```java
+package be.webtechie;
+
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
+import org.apache.log4j.RollingFileAppender;
+
+public class App {
+    private static Logger logger = Logger.getLogger(App.class);
+    public static void main( String[] args ){
+        Logger.getRootLogger().getLoggerRepository().resetConfiguration();
+        initLog();
+        logger.debug("Debug message");
+        logger.info("Info message");
+        logger.warn("Warn message");
+        logger.error("Error message");
+    }
+    private static void initLog() {
+        PatternLayout logPattern =
+        new PatternLayout("%d{yyyyMMdd HH:mm:ss,SSS} | %-5p | [%c{1}] | %m%n");
+        
+        // Log to the console, similar to System.out
+        ConsoleAppender console = new ConsoleAppender();
+        console.setName("ConsoleLogger");
+        console.setLayout(logPattern);
+        console.setThreshold(Level.DEBUG);
+        console.activateOptions();
+        Logger.getRootLogger().addAppender(console);
+        
+        // Log to a file to store it for later reference,
+        // creating max 5 files of 10MB
+        RollingFileAppender file = new RollingFileAppender();
+        file.setName("FileLogger");
+        file.setFile("logs/app.log");
+        file.setLayout(logPattern);
+        file.setThreshold(Level.INFO);
+        file.setAppend(true);
+        file.activateOptions();
+        file.setMaxFileSize("10MB");
+        file.setMaxBackupIndex(5);
+        Logger.getRootLogger().addAppender(file);
+    }
+}
+```
+
+---
